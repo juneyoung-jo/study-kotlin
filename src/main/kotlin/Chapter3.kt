@@ -96,3 +96,11 @@ fun <A, B, C, D> curried(): (A) -> (B) -> (C) -> (D) -> String = { a ->
     }
 }
 
+// 연습문제 3-10
+fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C =
+    { a ->
+        { b ->
+            f(a, b)
+        }
+    }
+
