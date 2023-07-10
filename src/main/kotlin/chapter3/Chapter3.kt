@@ -1,3 +1,5 @@
+package chapter3
+
 fun main() {
 
     // 3.2.8 함수의 합성
@@ -13,8 +15,6 @@ fun main() {
     // 3.3.5 익명 함수 사용하기
     val cos = higherCompose<Double, Double, Double>()({ x: Double -> Math.PI / 2 - x })(Math::sin)
     println("cos(2.0): ${cos(2.0)}")
-
-
 }
 
 
