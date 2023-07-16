@@ -3,7 +3,6 @@ package chapter4
 fun main() {
     val charList = listOf('a', 'b', 'c')
 
-    println(toStringRec(charList, ""))
     println(toString(charList))
     println(toStringCorec2(charList))
     println(sum1(10))
@@ -18,16 +17,9 @@ fun main() {
 fun sum1(n: Int): Int = if (n < 1) 0 else n + sum1(n - 1)
 fun sum2(n: Int): Int {
     tailrec fun sum(s: Int, i: Int): Int =
-        if (i == 0) s else sum(s + i, i - 1)
-    return sum(0, n)
+        if (i > n) s else sum(s + i, i + 1)
+    return sum(0, 0)
 }
-
-fun toStringRec(charList: List<Char>, s: String): String =
-    if (charList.isEmpty())
-        s
-    else
-        toStringRec(charList.drop(1), s + charList.first())
-
 
 // 공재귀: 한 단계의 출력을 다음 단계의 입력으로 사용하는 계산 단계를 합성
 fun append(s: String, c: Char): String = "$s$c"
