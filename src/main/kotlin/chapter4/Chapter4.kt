@@ -1,5 +1,7 @@
 package chapter4
 
+import java.lang.IllegalArgumentException
+
 fun main() {
     val charList = listOf('a', 'b', 'c')
 
@@ -7,6 +9,8 @@ fun main() {
     println(toStringCorec2(charList))
     println(sum1(10))
     println(sum2(10))
+    println(sum1(listOf(1, 2, 3, 4)))
+    println(sum2(listOf(1, 2, 3, 4)))
 }
 
 /**
@@ -42,4 +46,39 @@ fun toStringCorec2(list: List<Char>): String {
 
 fun prepend(c: Char, s: String) = "$c$s"
 
+// 연습문제 4-2
+val factorial: (Int) -> Int by lazy {
+    { n ->
+        if (n <= 1) n else n * factorial(n - 1)
+    }
+}
 
+/**
+ * 4.3 재귀 함수와 리스트
+ */
+fun <T> List<T>.head(): T =
+    if (this.isEmpty())
+        throw IllegalArgumentException("head called on empty list")
+    else
+        this[0]
+
+fun <T> List<T>.tail(): List<T> =
+    if (this.isEmpty())
+        throw IllegalArgumentException("tail called on empty list")
+    else
+        this.drop(1)
+
+fun sum1(list: List<Int>): Int =
+    if (list.isEmpty())
+        0
+    else
+        list.head() + sum1(list.tail())
+
+fun sum2(list: List<Int>): Int {
+    tailrec fun sumTail(list: List<Int>, acc: Int): Int =
+        if (list.isEmpty())
+            acc
+        else
+            sumTail(list.tail(), acc + list.head())
+    return sumTail(list, 0)
+}
