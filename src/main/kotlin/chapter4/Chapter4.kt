@@ -1,6 +1,7 @@
 package chapter4
 
 import java.lang.IllegalArgumentException
+import java.math.BigInteger
 
 fun main() {
     val charList = listOf('a', 'b', 'c')
@@ -11,6 +12,7 @@ fun main() {
     println(sum2(10))
     println(sum1(listOf(1, 2, 3, 4)))
     println(sum2(listOf(1, 2, 3, 4)))
+    println(fib(5000))
 }
 
 /**
@@ -81,4 +83,15 @@ fun sum2(list: List<Int>): Int {
         else
             sumTail(list.tail(), acc + list.head())
     return sumTail(list, 0)
+}
+
+// 연습문제 4-3
+fun fib(x: Int): BigInteger {
+    tailrec fun fib(val1: BigInteger, val2: BigInteger, x: BigInteger): BigInteger =
+        when {
+            (x == BigInteger.ZERO) -> BigInteger.ONE
+            (x == BigInteger.ONE) -> val1 + val2
+            else -> fib(val2, val1 + val2, x - BigInteger.ONE)
+        }
+    return fib(BigInteger.ZERO, BigInteger.ONE, BigInteger.valueOf(x.toLong()))
 }
