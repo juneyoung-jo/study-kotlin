@@ -13,6 +13,8 @@ fun main() {
     println(sum1(listOf(1, 2, 3, 4)))
     println(sum2(listOf(1, 2, 3, 4)))
     println(fib(5000))
+    println(makeString(listOf("a", "b", "c"), ","))
+    println(sum3(listOf(1, 2, 3, 4)))
 }
 
 /**
@@ -95,3 +97,25 @@ fun fib(x: Int): BigInteger {
         }
     return fib(BigInteger.ZERO, BigInteger.ONE, BigInteger.valueOf(x.toLong()))
 }
+
+// 연습문제 4-4
+fun <T> makeString(list: List<T>, delim: String): String {
+    tailrec fun makeString_(list: List<T>, acc: String): String =
+        when {
+            list.isEmpty() -> acc
+            acc.isEmpty() -> makeString_(list.tail(), "${list.head()}")
+            else -> makeString_(list.tail(), "$acc$delim${list.head()}")
+        }
+    return makeString_(list, "")
+}
+
+fun <T, U> foldLeft(list: List<T>, z: U, func: (U, T) -> U): U {
+    fun foldLeft(list: List<T>, acc: U): U =
+        if (list.isEmpty())
+            acc
+        else
+            foldLeft(list.tail(), func(acc, list.head()))
+    return foldLeft(list, z)
+}
+
+fun sum3(list: List<Int>) = foldLeft(list, 0, Int::plus)
