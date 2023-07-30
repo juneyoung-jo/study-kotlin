@@ -109,6 +109,7 @@ fun <T> makeString(list: List<T>, delim: String): String {
     return makeString_(list, "")
 }
 
+// 연습문제 4-5
 fun <T, U> foldLeft(list: List<T>, z: U, func: (U, T) -> U): U {
     fun foldLeft(list: List<T>, acc: U): U =
         if (list.isEmpty())
@@ -119,3 +120,10 @@ fun <T, U> foldLeft(list: List<T>, z: U, func: (U, T) -> U): U {
 }
 
 fun sum3(list: List<Int>) = foldLeft(list, 0, Int::plus)
+
+// 연습문제 4-6
+fun <T, U> foldRight(list: List<T>, identity: U, func: (T, U) -> U): U =
+    if (list.isEmpty())
+        identity
+    else
+        func(list.head(), foldRight(list.tail(), identity, func))
