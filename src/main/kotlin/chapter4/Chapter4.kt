@@ -15,8 +15,30 @@ fun main() {
     println(fib(5000))
     println(makeString(listOf("a", "b", "c"), ","))
     println(sum3(listOf(1, 2, 3, 4)))
+    println(range(1, 4))
 }
 
+// 연습문제 4-12
+fun range(start: Int, end: Int): List<Int> =
+    if (start >= end) listOf()
+    else prepend(range(start + 1, end), start)
+
+
+fun <T> prepend(list: List<T>, elem: T): List<T> = listOf(elem) + list
+
+// 연습문제 4-11
+//fun range(start: Int, end: Int): List<Int> = unfold(start, { it + 1 }, { it < end })
+
+// 연습문제 4-10
+fun <T> unfold(seed: T, f: (T) -> T, p: (T) -> Boolean): List<T> {
+    val result = mutableListOf<T>()
+    var tmp = seed
+    while (p(tmp)) {
+        result.add(tmp)
+        tmp = f(tmp)
+    }
+    return result
+}
 /**
  * 재귀
  * 장점: 쉬움
@@ -48,7 +70,7 @@ fun toStringCorec2(list: List<Char>): String {
 }
 
 
-fun prepend(c: Char, s: String) = "$c$s"
+//fun prepend(c: Char, s: String) = "$c$s"
 
 // 연습문제 4-2
 val factorial: (Int) -> Int by lazy {
@@ -127,3 +149,5 @@ fun <T, U> foldRight(list: List<T>, identity: U, func: (T, U) -> U): U =
         identity
     else
         func(list.head(), foldRight(list.tail(), identity, func))
+
+
