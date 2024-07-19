@@ -1,4 +1,4 @@
-package chapter3
+package functionalprogramming.chapter3
 
 fun main() {
 
@@ -103,4 +103,3 @@ fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C =
             f(a, b)
         }
     }
-

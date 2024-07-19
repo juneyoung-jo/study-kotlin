@@ -1,4 +1,4 @@
-package chapter4
+package functionalprogramming.chapter4
 
 import java.lang.IllegalArgumentException
 import java.math.BigInteger
@@ -149,5 +149,3 @@ fun <T, U> foldRight(list: List<T>, identity: U, func: (T, U) -> U): U =
         identity
     else
         func(list.head(), foldRight(list.tail(), identity, func))
-
-

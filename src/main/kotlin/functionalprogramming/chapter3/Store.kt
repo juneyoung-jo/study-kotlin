@@ -1,4 +1,4 @@
-package chapter3
+package functionalprogramming.chapter3
 
 object Store {
 
@@ -58,11 +58,3 @@ data class OrderLine(val product: Product, val count: Int) {
     fun weight() = product.weight * count
     fun amount() = product.price * count
 }
-
-
-
-
-
-
-
-

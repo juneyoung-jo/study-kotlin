@@ -1,4 +1,4 @@
-package chapter2
+package functionalprogramming.chapter2
 
 fun main() {
 
