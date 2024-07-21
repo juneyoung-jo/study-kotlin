@@ -11,3 +11,19 @@ class DatabaseError(val source: String): IOError()
 
 // 봉인된 인터페이스 'Error'를 구현하는 싱글톤 객체 생성
 object RuntimeError: Error
+
+fun logError(e: Error) = when(e) {
+    is DatabaseError -> println("Error while reading file ${e.source}")
+    is FileReadError -> println("Error while reading file ${e.file}")
+    RuntimeError -> println("Runtime error")
+}
+
+fun main() {
+    val errors = listOf(
+        DatabaseError("dataSource"),
+        FileReadError("fileRead"),
+        RuntimeError,
+    )
+
+    errors.forEach { logError(it) }
+}
